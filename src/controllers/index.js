@@ -16,7 +16,7 @@ const controllers = (services) => {
 
         "validate_rule": (req, res) => {
             const result = services.rule_validate(req.body);
-console.log(result);
+
             const statusCode = result.status == 'error' ? 400 : 200;
             return res.status(statusCode).json(result);
         }

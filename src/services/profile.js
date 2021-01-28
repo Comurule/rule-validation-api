@@ -7,7 +7,6 @@ const profile = () => {
     };
 
     self.respond = () => {
-
         return {
             "message": "My Rule-Validation API",
             "status": "success",
