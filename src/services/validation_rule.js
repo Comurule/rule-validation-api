@@ -64,6 +64,10 @@ const rule_validate = (dataObject) => {
         return self;
     };
 
+    self.is_valid_field = (data, dataType) =>{
+        
+    };
+
     self.respond = () => {
         if (self.error_message) {
             return {
