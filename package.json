@@ -2,9 +2,14 @@
   "name": "rule-validation-api",
   "version": "1.0.0",
   "description": "This is a simple rule-validation API.",
-  "main": "server.js",
+  "author": "Chibuike Umechukwu",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",    
+    "lint": "eslint -c .eslintrc.json --ext .js ./src",
+    "lint-fix": "eslint -c .eslintrc.json --ext .js ./src --fix",
+    "prettier": "prettier --write src/**/*.js",
+    "prettier-check": "prettier -l src/**/*.js",
     "start": "node src/server",
     "start-dev": "nodemon src/server"
   },
@@ -13,18 +18,23 @@
     "url": "git+https://github.com/Comurule/rule-validation-api.git"
   },
   "keywords": [],
-  "author": "Chibuike Umechukwu",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Comurule/rule-validation-api/issues"
   },
   "homepage": "https://github.com/Comurule/rule-validation-api#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
     "nodemon": "^2.0.7",
-    "swagger": "^0.7.5"
+    "prettier": "^2.2.1"
   }
 }

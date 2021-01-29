@@ -1,0 +1,220 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rule Validation API",
+    "description": "A Flutterwave Assessment. You can see the Github repository [here](https://github.com/Comurule/rule-validation-api)",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Chibuike Umechukwu",
+      "email": "umebuike@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "description": "Local Server (development)",
+      "url": "http://localhost:3000"
+    },
+    {
+      "description": "Heroku Server (production)",
+      "url": "https://comurule-flwsoln.herokuapp.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Get my Profile",
+      "description": "Retrieves my profile and displays the profile object."
+    },
+    {
+      "name": "My Rule-Validation API",
+      "description": "Run the `data` object with a given condition in the `rule` object ad returns the validation result."
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Get my Profile"
+        ],
+        "description": "Endpoint to get my profile.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieves my profile.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "My Rule-Validation API"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Chibuike Umechukwu"
+                        },
+                        "github": {
+                          "type": "string",
+                          "example": "@comurule"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "@umebuike@gmail.com"
+                        },
+                        "mobile": {
+                          "type": "string",
+                          "example": "07039601940"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validate-rule": {
+      "post": {
+        "tags": [
+          "My Rule-Validation API"
+        ],
+        "description": "Endpoint for rule validation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "rule",
+                  "data",
+                  "field",
+                  "condition"
+                ],
+                "type": "object",
+                "properties": {
+                  "rule": {
+                    "type": "object",
+                    "required": [
+                      "field",
+                      "condition",
+                      "condition_value"
+                    ],
+                    "properties": {
+                      "field": {
+                        "type": "string",
+                        "example": "missions"
+                      },
+                      "condition": {
+                        "type": "string",
+                        "example": "gte"
+                      },
+                      "condition_value": {
+                        "example": 30
+                      }
+                    }
+                  },
+                  "data": {
+                    "type": "JSON",
+                    "example": {
+                      "name": "James Holden",
+                      "crew": "Rocinante",
+                      "age": 34,
+                      "position": "Captain",
+                      "missions": 45
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully validates the data.field with the condition in the rule object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "message",
+                    "status",
+                    "data"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "field missions successfully validated."
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "validation": {
+                          "type": "JSON",
+                          "example": {
+                            "error": false,
+                            "field": "missions",
+                            "field_value": 30,
+                            "condition": "gte",
+                            "condition_value": 30
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "message",
+                    "status"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "field missions failed validation."
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "data": {
+                      "type": "JSON",
+                      "example": {
+                        "validation": {
+                          "error": true,
+                          "field": "missions",
+                          "field_value": 30,
+                          "condition": "gte",
+                          "condition_value": 54
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
