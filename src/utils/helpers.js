@@ -42,7 +42,7 @@ helper.get_rule_field_in_data_object = (dataObject, rule_field) => {
   if (fieldArr.length) {
     for (const key of fieldArr) {
       // check if the key exists in the object(toString() changes falsy values to string)
-      if (!data[key] && !data[key].toString()) {
+      if (data[key] === null || data[key === undefined]) {
         return null;
       }
 
