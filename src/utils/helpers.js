@@ -20,7 +20,7 @@ helper.is_payload_json = (dataObject) => Object.keys(dataObject).length;
 helper.has_required_fields = (data, fields = []) => {
   if (fields.length) {
     for (const key of fields) {
-      if (key && !data[key]) {
+      if (!data[key]) {
         return `${key} is required.`;
       }
     }
@@ -42,7 +42,7 @@ helper.get_rule_field_in_data_object = (dataObject, rule_field) => {
   if (fieldArr.length) {
     for (const key of fieldArr) {
       // check if the key exists in the object(toString() changes falsy values to string)
-      if (data[key] && !data[key].toString()) {
+      if (!data[key] && !data[key].toString()) {
         return null;
       }
 
