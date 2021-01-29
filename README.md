@@ -1,5 +1,5 @@
 # My Rule-Validation API
-A Flutterwave Assessment. You can test the [heroku live link](https://github.com/Comurule/rule-validation-api), using Swagger API Documentation 
+A Flutterwave Assessment. You can test the [heroku live link](https://comurule-flwsoln.herokuapp.com/api-docs/), using Swagger API Documentation 
 
 ## Table of Contents
 1. <a href="#application-features">Application Features</a>
@@ -40,42 +40,51 @@ $ npm start or yarn start
 
 ## API endpoints
 ```
-POST Request -> localhost:9000/v1/subscribe/userUpdate
-body:
-  url: http://myurl.com
-
+GET Request -> localhost:3000/
 
 response:
 {
-    "success": true,
-    "message": "Successfully subscribes to topic",
+    "message": "My Rule-Validation API",
+    "status": "success",
     "data": {
-        "topic": "user",
-        "url": "http://myurl.com"
+        "name": "Chibuike Umechukwu",
+        "github": "@comurule",
+        "email": "umebuike@gmail.com",
+        "mobile": "07039601940"
     }
 }
 
-POST Request -> localhost:3000/v1/publish/userUpdate
+POST Request -> localhost:3000/validate-rule
 body:
-  message: {
-      "user": {
-          "name": "juliet",
-          "age": 25
-      },
-      "status": "active
+{
+  "rule": {
+    "field": "missions.count",
+    "condition": "gte",
+    "condition_value": 30
+  },
+  "data": {
+    "name": "James Holden",
+    "crew": "Rocinante",
+    "age": 34,
+    "position": "Captain",
+    "missions": {
+      "count": 45,
+      "successful": 44,
+      "failed": 1
+    }
   }
+}
 
 response:
 {
-    "success": true,
-    "message": "Successfully publishes to bar subscribers",
-    "topic": "userUpdate",
-    "data": {
-      "user": {
-          "name": "juliet",
-          "age": 25
-      },
-      "status": "active
+  "message": "field missions.count successfully validated.",
+  "status": "success",
+  "data": {
+    "error": false,
+    "field": "missions.count",
+    "field_value": 45,
+    "condition": "gte",
+    "condition_value": 30
   }
 }
 
