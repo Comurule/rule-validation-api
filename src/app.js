@@ -1,10 +1,9 @@
-// Require External Dependencies
+// Require Dependencies
 const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
-// Require Internal dependencies
+const checkPayload = require('./middlewares/payloadValidation');
 const routes = require('./routes');
 
 const app = express();
@@ -25,6 +24,9 @@ const corsOptions = {
   preflightContinue: false,
   optionsSuccessStatus: 200,
 };
+
+// Middleware to check for invalid JSON request payload
+app.use(checkPayload);
 
 // Application Middlewares
 app.use(cors(corsOptions));

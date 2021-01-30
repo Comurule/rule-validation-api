@@ -7,14 +7,6 @@
  * given condition in the rule object.
  */
 const rule_validate = (helper) => (dataObject) => {
-  if (!helper.is_payload_json(dataObject)) {
-    return {
-      message: 'Invalid JSON payload passed.',
-      status: 'error',
-      data: null,
-    };
-  }
-
   const check_dataObject_fields = helper.has_required_fields(dataObject, [
     'rule',
     'data',
@@ -71,7 +63,7 @@ const rule_validate = (helper) => (dataObject) => {
 
   // at this point, we can add data object(validation object) to the response object.
   const validation = {
-    error: false, //this will be changed with respect to the validation result
+    error: false, // this will be changed with respect to the validation result
     field: rule.field,
     field_value,
     condition: rule.condition,
@@ -91,14 +83,14 @@ const rule_validate = (helper) => (dataObject) => {
       status: 'success',
       data: { validation },
     };
-  } else {
-    validation.error = true;
-    return {
-      message: `field ${dataObject.rule.field} failed validation.`,
-      status: 'error',
-      data: { validation },
-    };
   }
+
+  validation.error = true;
+  return {
+    message: `field ${dataObject.rule.field} failed validation.`,
+    status: 'error',
+    data: { validation },
+  };
 };
 
 const helpers = require('../utils/helpers');

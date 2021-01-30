@@ -1,24 +1,23 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable implicit-arrow-linebreak */
 
+const operations = {
+  eq: (data_field, condition_value) => data_field === condition_value,
+  neq: (data_field, condition_value) => data_field !== condition_value,
+  gte: (data_field, condition_value) => data_field >= condition_value,
+  gt: (data_field, condition_value) => data_field > condition_value,
+  contains: (data_field, condition_value) =>
+    data_field.includes(condition_value),
+};
+
 const helper = {};
 
 helper.validate_with_condition = (data_field, condition, condition_value) => {
-  const op = {
-    eq: data_field === condition_value,
-    neq: data_field !== condition_value,
-    gte: data_field >= condition_value,
-    gt: data_field > condition_value,
-    contains: data_field.includes(condition_value),
-  };
-
-  if (op[condition]) {
-    return op[condition];
+  if (operations[condition]) {
+    return operations[condition](data_field, condition_value);
   }
   return false;
 };
-
-helper.is_payload_json = (dataObject) => Object.keys(dataObject).length;
 
 helper.has_required_fields = (data, fields = []) => {
   if (fields.length) {
