@@ -25,6 +25,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+// Application Live Documentation (using swagger ui)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Middleware to check for invalid JSON request payload
 app.use(checkPayload);
 
@@ -35,9 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // Application Health Check Route
 app.get('/status', (req, res) => res.sendStatus(200));
-
-// Application Live Documentation (using swagger ui)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Applications Routes
 routes(app);
