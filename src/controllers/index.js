@@ -1,7 +1,3 @@
-/* eslint-disable no-param-reassign */
-
-const services = require('../services');
-
 /**
  * Handles all Route Requests
  * @param {object} services - Imported Services Object
@@ -20,5 +16,7 @@ const controllers = (services) => ({
     return res.status(statusCode).json(result);
   },
 });
+
+const services = require('../services');
 
 module.exports = controllers(services);

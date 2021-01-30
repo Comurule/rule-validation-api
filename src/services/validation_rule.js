@@ -1,6 +1,4 @@
-// Require Internal Dependencies
-const helpers = require('../utils/helpers');
-
+/* eslint-disable comma-dangle */
 /**
  * Uses the `helper` parameter to handle the returned function
  * @param {object} helper - Imported helper object
@@ -21,9 +19,9 @@ const rule_validate = (helper) => (dataObject) => {
     'rule',
     'data',
   ]);
-  if (check_dataObject_fields != true) {
+  if (check_dataObject_fields !== true) {
     return {
-      message: check,
+      message: check_dataObject_fields,
       status: 'error',
       data: null,
     };
@@ -54,7 +52,7 @@ const rule_validate = (helper) => (dataObject) => {
     'field',
   ]);
 
-  if (check_rule_fields != true) {
+  if (check_rule_fields !== true) {
     return {
       message: check_rule_fields,
       status: 'error',
@@ -80,7 +78,13 @@ const rule_validate = (helper) => (dataObject) => {
     condition_value: rule.condition_value,
   };
 
-  if (helper.conditions(field_value, rule.condition, rule.condition_value)) {
+  if (
+    helper.validate_with_condition(
+      field_value,
+      rule.condition,
+      rule.condition_value
+    )
+  ) {
     validation_result.error = false;
     return {
       message: `field ${dataObject.rule.field} successfully validated.`,
@@ -95,5 +99,7 @@ const rule_validate = (helper) => (dataObject) => {
     data: validation_result,
   };
 };
+
+const helpers = require('../utils/helpers');
 
 module.exports = rule_validate(helpers);

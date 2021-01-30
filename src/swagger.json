@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Rule Validation API",
-    "description": "A Flutterwave Assessment. You can see the Github repository [here](https://github.com/Comurule/rule-validation-api)",
+    "description": "A Flutterwave Assessment. You can see the Github repository [here](https://github.com/Comurule/rule-validation-api#readme)",
     "version": "1.0.0",
     "contact": {
       "name": "Chibuike Umechukwu",
