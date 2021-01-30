@@ -69,9 +69,9 @@ const rule_validate = (helper) => (dataObject) => {
     };
   }
 
-  // at this point, we can define our response object with data field(validation_object)
-  const validation_result = {
-    error: false,
+  // at this point, we can add data object(validation object) to the response object.
+  const validation = {
+    error: false, //this will be changed with respect to the validation result
     field: rule.field,
     field_value,
     condition: rule.condition,
@@ -85,19 +85,20 @@ const rule_validate = (helper) => (dataObject) => {
       rule.condition_value
     )
   ) {
-    validation_result.error = false;
+    validation.error = false;
     return {
       message: `field ${dataObject.rule.field} successfully validated.`,
       status: 'success',
-      data: validation_result,
+      data: { validation },
+    };
+  } else {
+    validation.error = true;
+    return {
+      message: `field ${dataObject.rule.field} failed validation.`,
+      status: 'error',
+      data: { validation },
     };
   }
-  validation_result.error = true;
-  return {
-    message: `field ${dataObject.rule.field} failed validation.`,
-    status: 'error',
-    data: validation_result,
-  };
 };
 
 const helpers = require('../utils/helpers');
