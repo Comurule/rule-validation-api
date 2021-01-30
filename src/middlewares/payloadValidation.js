@@ -1,7 +1,7 @@
 const check_payload = (req, res, next) => {
   let data = '';
   req.on('data', (chunk) => {
-    data += chunk;
+    data += chunk.toString();
   });
 
   req.on('end', () => {

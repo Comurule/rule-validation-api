@@ -11,12 +11,12 @@
   },
   "servers": [
     {
-      "description": "Local Server (development)",
-      "url": "http://localhost:3000"
-    },
-    {
       "description": "Heroku Server (production)",
       "url": "https://comurule-flwsoln.herokuapp.com"
+    },
+    {
+      "description": "Local Server (development)",
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
